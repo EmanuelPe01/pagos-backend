@@ -41,14 +41,17 @@ class ClienteController extends Controller
             $compras->makeHidden('id_cliente');
             $compras->makeHidden('id_producto');
 
+            $productos = collect();
+
             foreach($compras as $compra){
-                $compra->producto;
-                $compra->pagos;
+                $producto = $compra->producto;
+                $producto->id = $compra->id;
+                $productos->push($producto);
             }
 
             return response()->json([
                 'cliente' => $cliente,
-                'compras' => $compras
+                'compras' => $productos
             ], 200);
         } catch (Exception $ex){
             return response()->json([

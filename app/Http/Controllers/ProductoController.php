@@ -52,4 +52,24 @@ class ProductoController extends Controller
             ], 418);
         }
     }
+
+    public function destroy($id) 
+    {
+        try 
+        {
+            $producto = Producto::find($id);
+            $producto->delete();
+
+            return response()->json([
+                'message' => 'Registro eliminado'
+            ], 200);
+        }
+        catch (Exception $ex)
+        {
+            return response()->json([
+                'message' => 'error',
+                'description' => $ex
+            ], 418);
+        }
+    }
 }

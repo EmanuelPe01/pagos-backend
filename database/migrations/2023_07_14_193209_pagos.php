@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('mount');
             $table->unsignedBigInteger('id_compra')->nullable();
-            $table->foreign('id_compra')->references('id')->on('Compras');
+            $table->foreign('id_compra')->references('id')->on('Compras')->onDelete('cascade');
             $table->timestamps();
         });
     }

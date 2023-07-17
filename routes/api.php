@@ -14,9 +14,12 @@ Route::get('/getClient/{id}', [ClienteController::class, 'show']);
 //Rutas para el controlador de productos
 Route::post('/createProduct', [ProductoController::class, 'store']);
 Route::get('/allProducts', [ProductoController::class, 'getAll']);
+Route::delete('/deleteProduct/{id}', [ProductoController::class, 'destroy']);
 
 //Rutas para el controlador de compras
 Route::post('/createBuy', [ComprasController::class, 'store']);
 
 //Rutas para el controlador de pagos
 Route::post('/savePayment', [PagosController::class, 'store']);
+Route::get('/getPaymentsForBuy/{id}', [PagosController::class, 'getForBuy']);
+Route::put('/editPayment/{id}', [PagosController::class, 'editPayment']);
