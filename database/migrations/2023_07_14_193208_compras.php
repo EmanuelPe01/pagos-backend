@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedInteger('mount');
             $table->unsignedBigInteger('id_cliente')->nullable();
             $table->unsignedBigInteger('id_producto')->nullable();
-            $table->foreign('id_cliente')->references('id')->on('Clientes');
-            $table->foreign('id_producto')->references('id')->on('Productos');
+            $table->foreign('id_cliente')->references('id')->on('Clientes')->onDelete('cascade');
+            $table->foreign('id_producto')->references('id')->on('Productos')->onDelete('cascade');
             $table->timestamps();
         });
     }

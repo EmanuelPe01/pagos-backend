@@ -39,6 +39,7 @@ class PagosController extends Controller
                     return response()->json([
                         'message' => 'Pago registrado exitosamente',
                         'informacion_pago' => $pago,
+                        'adeudo' => round($restante - $pago->mount)
                     ], 201);
                 } else {
                     return response()->json([
@@ -51,9 +52,13 @@ class PagosController extends Controller
                     'id_compra' => $request->id_compra
                 ]);
 
+                $compra = Compras::find($pago->id_compra);
+                $restante = round($compra->mount - $pago->mount);
+
                 return response()->json([
                     'message' => 'Pago registrado exitosamente',
-                    'informacion_pago' => $pago
+                    'informacion_pago' => $pago,
+                    'adeudo' => round($restante - $pago->mount)
                 ], 201);
             }          
         }
@@ -92,7 +97,8 @@ class PagosController extends Controller
 
                 return response()->json([
                     'message' => 'Pago registrado exitosamente',
-                    'informacion_pago' => $payment
+                    'informacion_pago' => $payment,
+                    'adeudo' => round($restante - $payment->mount)
                 ], 201);
             } else {
                 return response()->json([
@@ -114,7 +120,6 @@ class PagosController extends Controller
         try
         {
             $compra = Compras::find($id);
-            $compra->load('pagos');
             $pagos = $compra->pagos;
             $pagos->makeHidden('id_compra');
             
