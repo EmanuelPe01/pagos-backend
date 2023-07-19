@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/allClients', [ClienteController::class, 'getAll']);
 Route::post('/createClient', [ClienteController::class, 'store']);
 Route::get('/getClient/{id}', [ClienteController::class, 'show']);
+Route::get('/getBuys/{id}', [ClienteController::class, 'showWithoutFilter']);
 
 //Rutas para el controlador de productos
 Route::post('/createProduct', [ProductoController::class, 'store']);
@@ -18,6 +19,8 @@ Route::delete('/deleteProduct/{id}', [ProductoController::class, 'destroy']);
 
 //Rutas para el controlador de compras
 Route::post('/createBuy', [ComprasController::class, 'store']);
+Route::delete('/deleteBuy/{id}', [ComprasController::class, 'destroy']);
+Route::put('/editBuy/{id}', [ComprasController::class, 'editBuy']);
 
 //Rutas para el controlador de pagos
 Route::post('/savePayment', [PagosController::class, 'store']);

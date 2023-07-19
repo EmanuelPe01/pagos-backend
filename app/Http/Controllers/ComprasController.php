@@ -35,4 +35,47 @@ class ComprasController extends Controller
             ], 418);
         }
     }
+
+    public function destroy($id) 
+    {
+        try 
+        {
+            $compra = Compras::find($id);
+            $compra->delete();
+
+            return response()->json([
+                'message' => 'Registro eliminado'
+            ], 200);
+        } 
+        catch (Exception $ex){
+            return response()->json([
+                'message' => "Error",
+                'error' => $ex
+            ], 418);
+        }
+    }
+
+    public function editBuy($id, Request $request)
+    {
+        try 
+        {
+            $compra = Compras::find($id);
+            $request->validate([
+                'mount' => 'required'
+            ]);
+
+            $compra->mount = $request->mount;
+            $compra->save();
+
+            return response()->json([
+                'message' => 'Regitro actualizado'
+            ], 200);
+        } 
+        catch (Exception $ex){
+            return response()->json([
+                'message' => "Error",
+                'error' => $ex
+            ], 418);
+        }
+    }
 }
